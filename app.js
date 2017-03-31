@@ -1,5 +1,6 @@
 import ReactDom from 'react-dom';
 import React from 'react';
+import { List } from './List';
 
 class Box extends React.Component {
     constructor() {
@@ -26,13 +27,6 @@ class Box extends React.Component {
 
     render() {
         const tasks = this.state.tasks;
-        const taskList = tasks.map((value, key) => {
-            return (
-                <li key={key}>
-                    {value}
-                </li>
-            );
-        });
         return (
             <div>
                 <form className="listAddForm" onSubmit={e => this.handleSubmit(e)}>
@@ -40,12 +34,7 @@ class Box extends React.Component {
                     <input type="submit" value="実行する" />
                 </form>
                 <hr/>
-                <ul>
-                    <li>"test"</li>
-                </ul>
-                <ul>
-                    {taskList}
-                </ul>
+                <List tasks={tasks} />
             </div>
         );
     }
