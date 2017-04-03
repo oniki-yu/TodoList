@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import {GET_TODO, ADD_TODO, DELETE_TODO} from './actions';
+import {GET_TODO, ADD_TODO, DELETE_TODO, FAVORITE_TODO} from './actions';
 
 const box = (state = {
     tasks: [],
     text: '',
 }, action) => {
-    const{tasks, text} = state;
+    const {tasks, text} = state;
+    const newTasks = tasks.concat();
     switch (action.type) {
         case GET_TODO:
             return Object.assign({}, state, {
@@ -13,18 +14,22 @@ const box = (state = {
         });
         case ADD_TODO:
             return Object.assign({}, state, {
-                tasks: tasks.concat([text]),
+                tasks: tasks.concat({
+                    "text": text,
+                    "favorite": false,
+                }),
                 text: ''
             });
         case DELETE_TODO:
-            const newTasks = tasks.concat();
-            console.log("splice前");
-            console.log(tasks);
             newTasks.splice(action.id ,1);
-            console.log("splice後");
-            console.log(tasks);
             return Object.assign({}, state, {
-                tasks: newTasks
+                tasks: newTasks,
+            });
+        case FAVORITE_TODO:
+            const target = newTasks[action.id];
+            target.favorite = !target.favorite;
+            return Object.assign({}, state, {
+                tasks: newTasks,
             });
         default:
             return state;
