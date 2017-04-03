@@ -1,45 +1,15 @@
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import ReactDom from 'react-dom';
-import React from 'react';
-import { List } from './List';
+import React, { Component, PropTypes } from 'react';
 
-class Box extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            tasks: [],
-            text: ''
-        };
-    }
+import Box from './components/Box';
+import { reducer } from './reducers';
 
-    handleChange(e) {
-        this.setState({text: e.target.value})
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        const text = this.state.text;
-        const tasks = this.state.tasks;
-        this.setState({
-            tasks: tasks.concat([text]),
-            text: ''
-        });
-    }
-
-    render() {
-        const tasks = this.state.tasks;
-        return (
-            <div>
-                <form className="listAddForm" onSubmit={e => this.handleSubmit(e)}>
-                    <input type="text" value={this.state.text} onChange={e => this.handleChange(e)} />
-                    <input type="submit" value="実行する" />
-                </form>
-                <hr/>
-                <List tasks={tasks} />
-            </div>
-        );
-    }
-}
+const store = createStore(reducer);
 
 ReactDom.render((
-    <Box />
+    <Provider store={store}>
+        <Box />
+    </Provider>
 ), document.getElementById('root'));
