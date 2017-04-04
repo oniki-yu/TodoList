@@ -37,5 +37,5 @@ const box = (state = {
 };
 
 export const reducer = combineReducers({
-    box
+    box //1つ1つのreducerを書く。増えたらここに追加する。
 });

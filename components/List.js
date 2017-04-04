@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ListItems } from './ListItems';
+import ContainerListItems from './ListItems';
 
 export const List = (props) => {
     const taskList = props.tasks.map((value, key) => {
         return (
-            <ListItems value={value.text} favorite={value.favorite} id={key} key={key} onClick={e => props.onClick(e)} favoritesFunction={e => props.favoritesFunction(e)} />
+            <ContainerListItems value={value.text} favorite={value.favorite} id={key} key={key} onClick={e => props.onClick(e)} favoritesFunction={e => props.favoritesFunction(e)} />
         );
     });
     return (

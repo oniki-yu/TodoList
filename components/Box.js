@@ -7,7 +7,6 @@ import { getTodo, addTodo, deleteTodo, favoriteTodo} from '../actions';
 class Box extends React.Component {
     render() {
         const { tasks, text, getTodo, addTodo, deleteTodo, favoriteTodo } = this.props;
-        console.log(tasks);
         return (
             <div>
                 <form className="listAddForm" onSubmit={(e) => {
